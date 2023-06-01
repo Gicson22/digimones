@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DigimonService } from './service/digimon.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'digimon';
+  public digimones:any;
+
+  constructor(private _digimonService: DigimonService){}
+
+  ngOnInit()
+  {
+    this._digimonService.listaDigimones().subscribe
+    (
+      (respuesta) => {this.digimones = respuesta; console.log(respuesta)},
+       (e) => {console.error(e)}
+    )
+  }
 }
